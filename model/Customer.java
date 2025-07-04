@@ -35,4 +35,36 @@ public class Customer {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public boolean canAfford(Double p){
+        return p <= balance;
+    }
+
+    public void dedcuteBalance(Double p){
+        balance -= p;
+    }
+
+    public void addProductToCart(Product product,int quantity) {
+        if (quantity > product.getQuantity()) {
+            System.out.println("The quantity is not sufficient");
+            return;
+        }
+        this.cart.addProduct(product,quantity);
+    }
+    public Double getTotalProductsPrice(){
+        return cart.getTotalProductsPrice();
+    }
+
+    public Double getTotalShippingPrice(){
+        return cart.getTotalShippingPrice();
+    }
+
+    public void printCheck(){
+        cart.printCheck();
+    }
+
 }

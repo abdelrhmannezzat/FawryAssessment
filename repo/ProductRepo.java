@@ -46,4 +46,21 @@ public class ProductRepo {
     public List<Product> getProductList() {
         return productList;
     }
+
+    public Product getProduct(String name) {
+        for (Product p : productList) {
+            if (p.getName().equals(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void removeProduct(String name,int quantity) {
+        for (Product p : productList) {
+            if (p.getName().equals(name)) {
+                p.setQuantity(p.getQuantity() - quantity);
+            }
+        }
+    }
 }
