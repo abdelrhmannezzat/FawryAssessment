@@ -11,7 +11,7 @@ public class DateExpiringStrategy implements ExpiringStrategy {
 
     @Override
     public Boolean isExpired() {
-        return null;
+        return LocalDate.now().isAfter(expiringDate);
     }
 
     public LocalDate getExpiringDate() {

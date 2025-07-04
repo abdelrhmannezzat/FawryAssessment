@@ -42,6 +42,14 @@ public class ProductRepo {
                         3,
                         new WeightShippingStrategy(8.0),
                         new NonExpiringStrategy()));
+        productList.add(
+                new Product(
+                        "Honey",
+                        5.0,
+                        10,
+                        new WeightShippingStrategy(0.4),
+                        new DateExpiringStrategy(LocalDate.of(2025,1,1))));
+
     }
     public List<Product> getProductList() {
         return productList;
