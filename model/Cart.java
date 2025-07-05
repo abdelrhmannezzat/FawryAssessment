@@ -7,67 +7,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Product> products;
-    private List<Integer> quantities;
+    private List<CartItem> items;
     public Cart() {
-        products = new ArrayList<Product>();
-        quantities = new ArrayList<>();
+        items = new ArrayList<CartItem>();
     }
-    public void addProduct(Product product,int quantity) {
-        products.add(product);
-        quantities.add(quantity);
+    public void addItem(Product product,int quantity) {
+        items.add(new CartItem(product,quantity));
     }
     public void removeProduct(Product product) {
-        products.remove(product);
+        items.removeIf(cartItem -> cartItem.getProduct().equals(product));
     }
-    public List<Product> getProducts() {
-        return products;
+    public List<CartItem> getCartItems() {
+        return items;
     }
 
-    public List<Integer> getQuantities() {
-        return quantities;
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
+
     public Double getTotalProductsPrice() {
         Double total = 0.0;
-        for (int i = 0;i < products.size();i++) {
-            total += products.get(i).getPrice() * quantities.get(i);
+        for (CartItem item : items) {
+            total += item.getPrice();
         }
         return total;
     }
     public Double getTotalShippingPrice(){
         Double total = 0.0;
-        for (int i = 0;i < products.size();i++) {
-            total += products.get(i).getShippingStrategy().getShippingCost()
-                    * quantities.get(i);
+        for (CartItem item : items) {
+            total += item.getShippingPrice();
         }
         return total;
     }
 
     public void printCheck(){
         System.out.println("*** Shipment Notice ***");
-        for (int i = 0;i < products.size();i++) {
-            if (products.get(i).getShippingStrategy() instanceof WeightShippingStrategy){
+        for (CartItem item : items) {
+            if (item.isShippable()){
                 System.out.println(
-                        quantities.get(i)
+                        item.getQuantity()
                                 + "x"
                                 + " "
-                                + products.get(i).getName()
+                                + item.getProduct().getName()
                                 + " "
-                                + ((WeightShippingStrategy) products.get(i).getShippingStrategy()).getWeight() * quantities.get(i)
+                                + item.getShippingPrice()
 
                 );
             }
         }
         System.out.println();
         System.out.println("*** CheckOut Receipt ***");
-        for (int i = 0;i < products.size();i++) {
+        for (CartItem item : items) {
             System.out.println(
-                    quantities.get(i)
+                    item.getQuantity()
                             + "x"
                             + " "
-                            + products.get(i).getName()
+                            + item.getProduct().getName()
                             + " "
-                            + products.get(i).getPrice() * quantities.get(i)
+                            + item.getPrice()
 
             );
         }

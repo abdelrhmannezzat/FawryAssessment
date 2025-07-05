@@ -12,6 +12,11 @@ public class WeightShippingStrategy implements ShippingStrategy{
         return weight * 0.5; // 0.5$ for each kilogram
     }
 
+    @Override
+    public boolean isShippable() {
+        return true;
+    }
+
     public Double getWeight() {
         return weight;
     }

@@ -57,4 +57,13 @@ public class Product {
     public void setExpiringStrategy(ExpiringStrategy expiringStrategy) {
         this.expiringStrategy = expiringStrategy;
     }
+
+    public boolean isShippable(){
+        return this.shippingStrategy.isShippable();
+    }
+
+    public boolean isExpired(){
+        return this.expiringStrategy.isExpired();
+    }
+
 }

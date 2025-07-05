@@ -18,8 +18,9 @@ public class ProjectService {
         ShippingService shippingService = new ShippingService();
 
         if (customer.canAfford(total)){
-            if (customer.getCart().getProducts().isEmpty()){
+            if (customer.getCart().isEmpty()){
                 System.out.println("Cart is empty");
+                System.out.println();
                 return;
             }
             shippingService.processShipment(customer.getCart(),productRepo);
@@ -31,5 +32,7 @@ public class ProjectService {
             System.out.println("Customer can't afford");
             System.out.println();
         }
+        System.out.println();
+        System.out.println();
     }
 }

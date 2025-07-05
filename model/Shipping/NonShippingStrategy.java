@@ -6,4 +6,9 @@ public class NonShippingStrategy implements ShippingStrategy{
     public Double getShippingCost() {
         return 0.0;
     }
+
+    @Override
+    public boolean isShippable() {
+        return false;
+    }
 }

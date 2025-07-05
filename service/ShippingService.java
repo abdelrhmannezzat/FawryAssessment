@@ -1,6 +1,7 @@
 package service;
 
 import model.Cart;
+import model.CartItem;
 import model.Customer;
 import model.Product;
 import model.Shipping.WeightShippingStrategy;
@@ -10,12 +11,11 @@ import java.util.List;
 
 public class ShippingService {
     public void processShipment(Cart cart, ProductRepo productRepo) {
-        List<Product> products = cart.getProducts();
-        List<Integer> quantities = cart.getQuantities();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getShippingStrategy() instanceof WeightShippingStrategy){
-                System.out.println("Processing " + products.get(i).getName());
-                productRepo.removeProduct(products.get(i).getName(),quantities.get(i) );
+        List<CartItem> cartItems = cart.getCartItems();
+        for (CartItem item : cartItems) {
+            if (item.isShippable()){
+                System.out.println("Processing " + item.getProduct().getName() + " to be shipped");
+                productRepo.removeProduct(item.getProduct().getName(),item.getQuantity() );
             }
         }
     }

@@ -53,11 +53,11 @@ public class Customer {
             System.out.println("The quantity is not sufficient");
             return;
         }
-        if (product.getExpiringStrategy().isExpired()){
+        if (product.isExpired()){
             System.out.println("This product is expired\n");
             return;
         }
-        this.cart.addProduct(product,quantity);
+        this.cart.addItem(product,quantity);
     }
     public Double getTotalProductsPrice(){
         return cart.getTotalProductsPrice();
